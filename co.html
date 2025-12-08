@@ -1,0 +1,3028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GGC Prep – Global Grand Challenges MCQ Practice</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: #f3f4f6;
+      color: #111827;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      background: #ffffff;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .nav-brand {
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 16px;
+      color: #111827;
+    }
+    .nav-pill {
+      padding: 3px 9px;
+      font-size: 11px;
+      border-radius: 999px;
+      background: #dbeafe;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+    }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      color: #6b7280;
+    }
+    .usage-badge {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      font-size: 11px;
+      color: #1d4ed8;
+      font-weight: 500;
+    }
+
+    /* Layout */
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    /* Hero */
+    .hero {
+      margin-top: 12px;
+      margin-bottom: 24px;
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.5fr);
+      gap: 16px;
+    }
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+    .hero-main h1 {
+      font-size: clamp(26px, 3.5vw, 32px);
+      margin: 0 0 8px;
+      color: #111827;
+    }
+    .hero-main p {
+      margin: 0;
+      color: #4b5563;
+      font-size: 14px;
+    }
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 11px;
+    }
+    .pill {
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      color: #374151;
+      background: #ffffff;
+    }
+    .hero-card {
+      border-radius: 16px;
+      padding: 14px;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      font-size: 13px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+    }
+    .hero-card h2 {
+      margin-top: 0;
+      font-size: 16px;
+      margin-bottom: 6px;
+      color: #111827;
+    }
+    .hero-stat-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    .stat-chip {
+      padding: 6px 10px;
+      border-radius: 10px;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      font-size: 11px;
+      color: #047857;
+    }
+
+    /* Module selector */
+    .section-title {
+      font-size: 16px;
+      margin-bottom: 8px;
+      margin-top: 8px;
+      color: #111827;
+    }
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 900px) {
+      .modules-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 600px) {
+      .modules-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .module-card {
+      border-radius: 14px;
+      padding: 10px 12px;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease,
+        border-color 0.12s ease, background 0.12s ease;
+      font-size: 13px;
+    }
+    .module-card:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+      border-color: #bfdbfe;
+    }
+    .module-card.active {
+      background: #eff6ff;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.25);
+    }
+    .module-tag {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      border: 1px solid #d1d5db;
+      color: #4b5563;
+      display: inline-block;
+      margin-bottom: 4px;
+    }
+    .module-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #111827;
+    }
+    .module-sub {
+      color: #6b7280;
+      font-size: 11px;
+    }
+
+    /* Main content: sidebar (weeks/days) + quiz */
+    .content-layout {
+      display: grid;
+      grid-template-columns: 240px minmax(0, 1fr);
+      gap: 14px;
+      margin-top: 6px;
+    }
+    @media (max-width: 800px) {
+      .content-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .sidebar {
+      border-radius: 14px;
+      padding: 10px;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      font-size: 13px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+    }
+    .sidebar h3 {
+      margin-top: 0;
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: #111827;
+    }
+    .week-block {
+      margin-bottom: 8px;
+    }
+    .week-title {
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #4b5563;
+    }
+    .day-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    .day-pill {
+      padding: 3px 7px;
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      font-size: 11px;
+      cursor: pointer;
+      background: #f9fafb;
+      color: #374151;
+    }
+    .day-pill.has-questions {
+      border-color: #93c5fd;
+    }
+    .day-pill.active {
+      background: #2563eb;
+      border-color: #1d4ed8;
+      color: #ffffff;
+    }
+
+    /* Quiz */
+    .quiz-wrapper {
+      border-radius: 14px;
+      padding: 12px;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      font-size: 14px;
+      box-shadow: 0 4px 18px rgba(15, 23, 42, 0.05);
+    }
+    .quiz-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: center;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 6px;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+    .badge-soft {
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      border: 1px solid #e5e7eb;
+      color: #374151;
+      background: #f9fafb;
+    }
+    .question {
+      margin-bottom: 18px;
+      padding: 10px;
+      background: #f9fafb;
+      border-radius: 10px;
+      border: 1px solid #e5e7eb;
+    }
+    .question h4 {
+      margin: 0 0 6px;
+      font-size: 14px;
+      color: #111827;
+    }
+    .option {
+      margin: 6px 0;
+      padding: 8px;
+      background: #ffffff;
+      border-radius: 8px;
+      cursor: pointer;
+      user-select: none;
+      border: 1px solid #e5e7eb;
+      font-size: 13px;
+      color: #111827;
+    }
+    .option:hover {
+      background: #eff6ff;
+    }
+    .selected {
+      background: #e0ecff !important;
+      border-color: #2563eb;
+    }
+    .correct {
+      background: #dcfce7 !important;
+      border-color: #16a34a !important;
+    }
+    .wrong {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+    }
+    .explanation {
+      display: none;
+      font-size: 12px;
+      margin-top: 4px;
+      color: #6b7280;
+    }
+    .quiz-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+    #submitBtn {
+      padding: 8px 16px;
+      background: #2563eb;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    #submitBtn:hover {
+      background: #1d4ed8;
+    }
+    #resetBtn {
+      padding: 8px 14px;
+      background: #ffffff;
+      color: #374151;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    #resetBtn:hover {
+      background: #f3f4f6;
+    }
+    #scoreBox {
+      font-size: 14px;
+      font-weight: 500;
+      color: #b45309;
+    }
+    .empty-note {
+      font-size: 13px;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-brand">
+      <span>GGC Prep</span>
+      <span class="nav-pill">Objective MCQ Practice</span>
+    </div>
+    <div class="nav-right">
+      <span>Global Grand Challenges · GGC Exam Practice</span>
+      <span class="usage-badge" id="usageBadge">Tests taken (this browser): 0</span>
+    </div>
+  </header>
+
+  <main class="page">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-main">
+        <h1>Practice GGC MCQs by Week, Day & Module</h1>
+        
+        
+      </div>
+      <aside class="hero-card">
+        <h2>How this scales to Week 13+</h2>
+        <p>
+          The structure already supports Weeks 1 to 13, with Day 1–3 for each week.
+          As we convert more PPTs into MCQs, we just plug them into the data file and the
+          quizzes appear automatically.
+        </p>
+        <div class="hero-stat-row">
+          <span class="stat-chip">Auto scoring</span>
+          <span class="stat-chip">Explanations for wrong answers</span>
+          <span class="stat-chip">Usage counter (tests submitted)</span>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Module Selection -->
+    <section>
+      <h2 class="section-title">Choose Module</h2>
+      <div class="modules-grid" id="moduleGrid"></div>
+    </section>
+
+    <!-- Main Content: Sidebar + Quiz -->
+    <section class="content-layout">
+      <aside class="sidebar">
+        <h3>Weeks & Days</h3>
+        <div id="weekDayContainer"></div>
+      </aside>
+
+      <section class="quiz-wrapper">
+        <div class="quiz-header">
+          <div>
+            <div id="quizTitle" style="font-weight:600;">Select a module and day to begin.</div>
+            <div id="quizSubtitle" style="font-size:12px;color:#6b7280;">
+              You will see MCQs here once you choose a Week & Day.
+            </div>
+          </div>
+          <div class="badge-soft" id="quizMetaBadge">0 Questions</div>
+        </div>
+
+        <div id="quizContainer">
+          <p class="empty-note">
+            No quiz loaded yet. Use the left sidebar to choose Week 1 · Day 1, Day 2, etc.
+          </p>
+        </div>
+
+        <div class="quiz-actions">
+          <button id="submitBtn">Submit Test</button>
+          <button id="resetBtn">Reset</button>
+          <div id="scoreBox"></div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    /*
+      DATA MODEL
+      modules -> weeks -> days -> questions
+      Supports Weeks 1–13, Day 1–3.
+      Right now, MCQs are filled for:
+      Module: Political, Week 1, Day 1–3.
+      You can add more by editing questionsData.
+    */
+
+    const TOTAL_WEEKS = 13;
+    const DAY_LABELS = ["Day 1", "Day 2", "Day 3"];
+
+    const modules = [
+      { id: "political", name: "Political", colorTag: "Module 1", desc: "World order, power, India and global politics." },
+      { id: "environmental", name: "Environmental", colorTag: "Module 2", desc: "Climate change, biodiversity, sustainability." },
+      { id: "economic", name: "Economic", colorTag: "Module 3", desc: "Growth, inequality, trade and development." },
+      { id: "technological", name: "Technological", colorTag: "Module 4", desc: "AI, digital futures and tech risks." },
+    ];
+
+    // QUESTIONS: Political · Week 1 · Day 1–3
+    const questionsData = {
+      political: {
+        "Week 1": {
+          "Day 1": [
+            {
+             q: "The COVID-19 pandemic is used in the slides to illustrate:",
+      options: [
+        "The end of globalisation",
+        "The superiority of Asian economies",
+        "Both the strength and fragility of globalisation",
+        "The end of scientific cooperation"
+      ],
+      correct: 2,
+      explanation:
+        "COVID-19 showed how fast the world is connected (spread) and how fragile it is (supply chain collapse)."
+    },
+    {
+      q: "According to Dr. S. Jaishankar’s quote in the PPT, solving global challenges requires:",
+      options: [
+        "Stronger borders",
+        "Finding more common ground",
+        "Reducing all international cooperation",
+        "Avoiding public debate"
+      ],
+      correct: 1,
+      explanation:
+        "He says we must identify areas where major powers can find common ground on tough issues."
+    },
+    {
+      q: "In the PPT, 'Globalisation' refers to:",
+      options: [
+        "Western domination",
+        "Only cultural exchange",
+        "Interconnectedness across trade, ideas, media and education",
+        "Economic decline"
+      ],
+      correct: 2,
+      explanation:
+        "Slides show how food, media, education, technology and aspirations are globally interconnected."
+    },
+    {
+      q: "Globalisation is caused by:",
+      options: [
+        "Military expansion only",
+        "Climate change",
+        "Internet, trade, migration, media, education, UN and transport",
+        "Viral videos on social media"
+      ],
+      correct: 2,
+      explanation:
+        "The PPT lists internet, trade, entertainment, migration, education, UN bodies, and transport as causes."
+    },
+    {
+      q: "In 'Global Grand Challenges', the word 'Global' means:",
+      options: [
+        "Affecting only developing countries",
+        "Affecting only large economies",
+        "Affecting the entire planet",
+        "Affecting small local communities"
+      ],
+      correct: 2,
+      explanation:
+        "Global = problems that impact the whole planet, not just one region."
+    },
+    {
+      q: "In 'Global Grand Challenges', the word 'Grand' means:",
+      options: [
+        "Very old",
+        "Large and high-impact",
+        "Rare problems",
+        "Easy to solve"
+      ],
+      correct: 1,
+      explanation:
+        "Grand refers to high magnitude and deep impact problems."
+    },
+    {
+      q: "In GGC, the word 'Challenge' refers to:",
+      options: [
+        "Already solved problems",
+        "Problems yet to be solved",
+        "Only political issues",
+        "Competition between nations"
+      ],
+      correct: 1,
+      explanation:
+        "Challenge = problem that humanity has not fully solved yet."
+    },
+    {
+      q: "Which of the following is shown as a category of Global Grand Challenges?",
+      options: [
+        "Sports",
+        "Philosophy",
+        "Political, Environmental, Economic, Technological and Social",
+        "Fashion"
+      ],
+      correct: 2,
+      explanation:
+        "The PPT shows 5 challenge domains: Political, Environmental, Economic, Technological, Social."
+    },
+    {
+      q: "According to the PPT, why does GGC matter to students?",
+      options: [
+        "It helps memorise facts",
+        "It avoids global problems",
+        "It improves critical thinking and strategic problem-solving",
+        "It focuses only on Indian history"
+      ],
+      correct: 2,
+      explanation:
+        "Slides highlight critical thinking, interdisciplinary learning, and real-world problem solving."
+    },
+    {
+      q: "Which of the following was shown as an example of a political challenge for India?",
+      options: [
+        "Clean Tech Packaging",
+        "Trauma Support",
+        "Secure E-Voting Systems",
+        "Green Business ESG"
+      ],
+      correct: 2,
+      explanation:
+        "In the table, Secure E-Voting (linked to B.Tech) is under the Political challenge domain."
+            }
+          ],
+          "Day 2": [
+            {
+              q: "“Order” in political studies refers to:",
+    options: [
+      "Strict military control",
+      "A system of rules and norms that create stability",
+      "Religious dominance",
+      "Random interactions between states"
+    ],
+    correct: 1,
+    explanation: "Order describes rules and norms that maintain stability and predictability among societies and states."
+  },
+  {
+    q: "World Order is best described as:",
+    options: [
+      "Local municipal governance",
+      "A global arrangement shaping interactions among states",
+      "A system used only during wartime",
+      "Cultural traditions within a country"
+    ],
+    correct: 1,
+    explanation: "World Order refers to global arrangements that structure political, economic, and strategic interactions."
+  },
+  {
+    q: "A major purpose of world order is to:",
+    options: [
+      "Increase conflict",
+      "Create predictability and reduce large-scale war",
+      "End diplomacy",
+      "Replace national sovereignty"
+    ],
+    correct: 1,
+    explanation: "World order provides stability and reduces the likelihood of major conflicts."
+  },
+  {
+    q: "An “ethical order” in history was based on:",
+    options: [
+      "Pure military strength",
+      "Higher moral principles guiding rulers",
+      "Modern technology",
+      "International treaties"
+    ],
+    correct: 1,
+    explanation: "Ethical orders relied on moral codes such as Dharma or Confucian values."
+  },
+  {
+    q: "In ancient India, political authority was justified through:",
+    options: [
+      "Economic power",
+      "Dharma and moral responsibility",
+      "Wealth accumulation",
+      "Royal bloodline alone"
+    ],
+    correct: 1,
+    explanation: "Rulers were expected to act as guardians of Dharma."
+  },
+  {
+    q: "The “Mandate of Heaven” in China meant:",
+    options: [
+      "Military leaders must conquer new lands",
+      "Rulers must govern justly to remain legitimate",
+      "Only noble families can rule",
+      "Heaven directly appoints kings for life"
+    ],
+    correct: 1,
+    explanation: "The Mandate of Heaven required just and moral governance from rulers."
+  },
+  {
+    q: "Confucianism emphasised that rulers must:",
+    options: [
+      "Maximise wealth",
+      "Rule through virtue and moral behaviour",
+      "Avoid public welfare",
+      "Follow foreign models"
+    ],
+    correct: 1,
+    explanation: "Confucian thought prioritised moral leadership and ethical governance."
+  },
+  {
+    q: "Which development weakened religion-based authority in Europe?",
+    options: [
+      "Discovery of oxygen",
+      "Protestant Reformation",
+      "Russian Revolution",
+      "French cuisine"
+    ],
+    correct: 1,
+    explanation: "The Protestant Reformation challenged centralized religious authority."
+  },
+  {
+    q: "The Industrial Revolution reshaped global power by:",
+    options: [
+      "Reducing productivity",
+      "Weakening European nations",
+      "Increasing industrial and military capacity",
+      "Ending all global trade"
+    ],
+    correct: 2,
+    explanation: "Industrialization boosted production and military power, expanding European influence."
+  },
+  {
+    q: "Colonisation changed global order by:",
+    options: [
+      "Making all nations equal",
+      "Creating interconnected trade and political networks",
+      "Eliminating competition",
+      "Ending conflict worldwide"
+    ],
+    correct: 1,
+    explanation: "Colonial expansion linked world regions economically, politically, and culturally."
+  },
+  {
+    q: "A key feature of world order is that it:",
+    options: [
+      "Never changes",
+      "Is shaped by both power and ideas",
+      "Depends only on economy",
+      "Operates only in peacetime"
+    ],
+    correct: 1,
+    explanation: "World order evolves through a combination of power dynamics and guiding principles."
+            }
+          ],
+          "Day 3": [
+            {
+              q: "Which major global power emerged as the central architect of the post–World War II international order?",
+    options: ["United Kingdom", "Soviet Union", "United States", "France"],
+    correct: 2,
+    explanation: "After WWII, the US emerged economically and militarily dominant, shaping the Liberal International Order."
+  },
+  {
+    q: "Which principle was part of the Atlantic Charter of 1941?",
+    options: ["Closed borders", "Self-determination and free trade", "Return to isolationism", "Expansion of colonial rule"],
+    correct: 1,
+    explanation: "The Charter emphasised self-determination, free trade, and collective security."
+  },
+  {
+    q: "Which term refers to the US-led period of relative global stability after WWII?",
+    options: ["Pax Romana", "Pax Americana", "Cold Peace", "Great Reset"],
+    correct: 1,
+    explanation: "Pax Americana describes US-backed global stability after WWII."
+  },
+  {
+    q: "A core belief behind the Liberal International Order is that economic interdependence:",
+    options: [
+      "Increases the risk of war",
+      "Has no impact on conflict",
+      "Reduces the likelihood of war",
+      "Only benefits developing nations"
+    ],
+    correct: 2,
+    explanation: "The LIO assumes interconnected economies are less likely to engage in war."
+  },
+  {
+    q: "Which of the following is a core pillar of the Liberal International Order?",
+    options: ["Closed markets", "Collective security", "Authoritarian governance", "Isolationist policies"],
+    correct: 1,
+    explanation: "Collective security is foundational to the LIO framework."
+  },
+  {
+    q: "The Monroe Doctrine originally aimed to:",
+    options: [
+      "Promote global free trade",
+      "Stop all immigration",
+      "Prevent European colonial interference in the Americas",
+      "Expand US military bases worldwide"
+    ],
+    correct: 2,
+    explanation: "It declared the Western Hemisphere off-limits to European colonialism."
+  },
+  {
+    q: "During the 19th century, the United States primarily pursued:",
+    options: ["Interventionism", "Isolationism", "Colonial expansion in Asia", "Global policing"],
+    correct: 1,
+    explanation: "The US avoided European conflicts and followed isolationist policies."
+  },
+  {
+    q: "Which war pushed the US decisively into global leadership?",
+    options: ["American Civil War", "World War I", "Vietnam War", "Gulf War"],
+    correct: 1,
+    explanation: "US entry in 1917 shifted WWI and marked its emergence as a global actor."
+  },
+  {
+    q: "What major event shattered US isolationism in the 1930s?",
+    options: ["Rise of aggressive powers", "Great Depression recovery", "Discovery of oil in Texas", "Formation of the EU"],
+    correct: 0,
+    explanation: "Aggressive expansion by Germany, Japan, and Italy pushed the US away from isolationism."
+  },
+  {
+    q: "Which program allowed the US to supply massive war materials to Allies during WWII?",
+    options: ["Marshall Plan", "Lend-Lease Program", "Truman Doctrine", "Eisenhower Initiative"],
+    correct: 1,
+    explanation: "The Lend-Lease Program armed Allied forces before US entry into WWII."
+  },
+  {
+    q: "What key advantage did the US possess at the end of WWII?",
+    options: [
+      "Largest colonial empire",
+      "Most destroyed infrastructure",
+      "Monopoly on nuclear weapons",
+      "Weak industrial base"
+    ],
+    correct: 2,
+    explanation: "Until 1949, the US was the only nuclear-capable country, reinforcing its dominance."
+  },
+  {
+    q: "Which institution was created in 1945 as part of the emerging postwar order?",
+    options: ["NATO", "United Nations", "European Union", "ASEAN"],
+    correct: 1,
+    explanation: "The UN Charter was signed by 50 nations in 1945 to promote peace and cooperation."
+  },
+  {
+    q: "Which feature distinguishes the Liberal International Order from colonial-era systems?",
+    options: [
+      "It is based on racial hierarchy",
+      "It claims to be universal in principles",
+      "It promotes territorial conquest",
+      "It excludes economic cooperation"
+    ],
+    correct: 1,
+    explanation: "Unlike colonial orders, the LIO is framed as universal—though imperfect in practice."
+            }
+          ]
+          
+        },
+        "Week 2": {
+    "Day 1": [  {
+    q: "The Liberal International Order was built on the belief that:",
+    options: [
+      "Autocratic regimes create the most stability",
+      "Open markets and democratic governance reduce global conflict",
+      "Isolationism prevents war",
+      "Protectionism guarantees cooperation"
+    ],
+    correct: 1,
+    explanation: "LIO assumes economic openness and democratic systems reduce war."
+  },
+  {
+    q: "The Atlantic Charter emphasized:",
+    options: [
+      "Expansion of colonial empires",
+      "Self-determination and economic cooperation",
+      "Military rule",
+      "Isolated economic systems"
+    ],
+    correct: 1,
+    explanation: "The Charter stressed self-determination and cooperation during WWII."
+  },
+  {
+    q: "Which institution was created to stabilise the global monetary system?",
+    options: ["UNESCO", "IMF", "NATO", "WTO"],
+    correct: 1,
+    explanation: "IMF was part of Bretton Woods for monetary stability."
+  },
+  {
+    q: "NATO’s Article 5 is based on the idea of:",
+    options: [
+      "Arms control",
+      "Collective security",
+      "Economic protectionism",
+      "Unilateral intervention"
+    ],
+    correct: 1,
+    explanation: "Article 5 states an attack on one is an attack on all."
+  },
+  {
+    q: "The Marshall Plan aimed to:",
+    options: [
+      "Fund Asian infrastructure",
+      "Rebuild Western Europe and contain communism",
+      "Support Soviet reconstruction",
+      "Create a global military alliance"
+    ],
+    correct: 1,
+    explanation: "Marshall Plan rebuilt Europe and prevented Soviet influence."
+  },
+  {
+    q: "Which issue weakened the effectiveness of the UN Security Council?",
+    options: [
+      "Lack of membership",
+      "Veto power of permanent members",
+      "Insufficient funding",
+      "Absence of military forces"
+    ],
+    correct: 1,
+    explanation: "Veto power caused paralysis on many issues."
+  },
+  {
+    q: "The Cold War challenged the LIO primarily through:",
+    options: [
+      "Ideological division between the US and USSR",
+      "Complete global cooperation",
+      "Unified economic policies",
+      "Joint military operations"
+    ],
+    correct: 0,
+    explanation: "The capitalist vs communist divide undermined unity."
+  },
+  {
+    q: "Which event symbolized the US trying to expand LIO globally?",
+    options: [
+      "Fall of the Berlin Wall",
+      "Post–Cold War unipolar moment",
+      "Cuban Missile Crisis",
+      "Iran–Iraq War"
+    ],
+    correct: 1,
+    explanation: "After 1991, US believed the LIO could become global."
+  },
+  {
+    q: "The ‘China Shock’ refers to:",
+    options: [
+      "China closing its markets",
+      "Economic shifts after China joined the WTO",
+      "A military conflict with the US",
+      "China abandoning globalization"
+    ],
+    correct: 1,
+    explanation: "China's WTO entry caused major shifts in global manufacturing."
+  },
+  {
+    q: "Which crisis exposed weaknesses in the LIO’s economic foundation?",
+    options: [
+      "Korean War",
+      "9/11 attacks",
+      "2008 global financial crisis",
+      "Brexit"
+    ],
+    correct: 2,
+    explanation: "2008 crisis revealed fragility in the global financial system."
+  } ],
+    "Day 2": [    {
+    q: "A coup typically involves:",
+    options: [
+      "Peaceful election reform",
+      "Sudden overthrow of a government",
+      "Economic sanctions",
+      "Border negotiations"
+    ],
+    correct: 1,
+    explanation: "A coup is a rapid takeover of government power by force or coercion."
+  },
+  {
+    q: "U.S. involvement in foreign coups during the Cold War was mainly motivated by:",
+    options: [
+      "Promoting cultural exchange",
+      "Preventing communist influence",
+      "Expanding trade with allies",
+      "Supporting monarchies"
+    ],
+    correct: 1,
+    explanation: "Most interventions aimed to stop governments aligned with the USSR."
+  },
+  {
+    q: "Which method was commonly used in U.S. covert operations?",
+    options: [
+      "Environmental treaties",
+      "Propaganda, intelligence operations, and funding opposition groups",
+      "Sports diplomacy",
+      "Open public debates"
+    ],
+    correct: 1,
+    explanation: "Covert actions involved propaganda and supporting anti-government factions."
+  },
+  {
+    q: "The 1953 coup in Iran removed:",
+    options: ["Reza Shah", "Mohammad Mossadegh", "Saddam Hussein", "Nasser"],
+    correct: 1,
+    explanation: "CIA helped depose Mossadegh, reinstating the Shah."
+  },
+  {
+    q: "The 1954 coup in Guatemala was linked to:",
+    options: [
+      "Land reforms affecting American corporate interests",
+      "Religious conflicts",
+      "Border disputes with Mexico",
+      "Oil shortages"
+    ],
+    correct: 0,
+    explanation: "US backed regime change due to United Fruit Company's concerns."
+  },
+  {
+    q: "Which country experienced a U.S.-backed military coup in 1963?",
+    options: ["Vietnam", "Japan", "Egypt", "France"],
+    correct: 0,
+    explanation: "CIA supported coup against Ngo Dinh Diem in Vietnam."
+  },
+  {
+    q: "The U.S. invasion of Grenada in 1983 aimed to:",
+    options: [
+      "Stop a communist-aligned government",
+      "Expand tourism",
+      "Support European trade",
+      "Respond to an economic crisis"
+    ],
+    correct: 0,
+    explanation: "US intervened to remove a Marxist government."
+  },
+  {
+    q: "The 1989 U.S. invasion of Panama targeted:",
+    options: [
+      "Control over oil fields",
+      "Removal of Manuel Noriega",
+      "Annexation of Central America",
+      "Stopping refugee flows"
+    ],
+    correct: 1,
+    explanation: "Noriega was removed due to drug trafficking and canal security."
+  },
+  {
+    q: "A common long-term effect of coups is:",
+    options: [
+      "Strengthened democratic institutions",
+      "Political instability and human rights issues",
+      "Higher economic equality",
+      "Guaranteed peace"
+    ],
+    correct: 1,
+    explanation: "Coups often destabilize countries for years."
+  },
+  {
+    q: "Analyzing coups helps students understand:",
+    options: [
+      "Only economic development",
+      "Global power politics and foreign intervention patterns",
+      "Sports rivalries",
+      "Local cultural festivals"
+    ],
+    correct: 1,
+    explanation: "Coup analysis reveals strategic motivations and geopolitical influence."
+  } ]
+  },
+  "Week 3": {
+    "Day 1": [  {
+      q: "“Unipolar moment” refers to a period when:",
+      options: [
+        "Multiple superpowers shared dominance",
+        "One country holds unmatched global power",
+        "No country has global influence",
+        "Regional powers control world order"
+      ],
+      correct: 1,
+      explanation: "Unipolarity occurs when one country dominates global political and military power."
+    },
+    {
+      q: "The United States’ unipolar moment began mainly after:",
+      options: ["World War I", "World War II", "The Cold War ended", "The Gulf War"],
+      correct: 2,
+      explanation: "U.S. dominance grew after the Soviet Union collapsed in 1991."
+    },
+    {
+      q: "A major factor behind the perceived decline of U.S. dominance is:",
+      options: [
+        "Increase in U.S. population",
+        "Rise of China as an economic and military competitor",
+        "Decline in global internet access",
+        "Expansion of NATO"
+      ],
+      correct: 1,
+      explanation: "China’s rapid economic and military growth challenges U.S. primacy."
+    },
+    {
+      q: "One sign of weakening U.S. economic leadership is:",
+      options: [
+        "Rising U.S. share of global manufacturing",
+        "Loss of industrial production to Asian economies",
+        "Growing American exports",
+        "Higher U.S. savings rate"
+      ],
+      correct: 1,
+      explanation: "Large portions of production have shifted to China and Southeast Asia."
+    },
+    {
+      q: "Which geopolitical event significantly damaged U.S. global credibility?",
+      options: ["Korean War", "Iraq War (2003)", "Apollo Moon landing", "Brexit"],
+      correct: 1,
+      explanation: "The Iraq War was widely criticized and damaged global trust in U.S. leadership."
+    },
+    {
+      q: "A key challenge to U.S. power from within is:",
+      options: [
+        "High levels of educational spending",
+        "Deep political polarization",
+        "Excess industrial growth",
+        "Lack of immigration"
+      ],
+      correct: 1,
+      explanation: "Political polarization weakens decision-making and reduces global confidence."
+    },
+    {
+      q: "The term “relative decline” means:",
+      options: [
+        "A country loses all power",
+        "A country collapses economically",
+        "Other countries grow faster, reducing the leader’s advantage",
+        "Decline in population only"
+      ],
+      correct: 2,
+      explanation: "Relative decline occurs when rivals grow faster than the dominant power."
+    },
+    {
+      q: "Which factor strengthened rivals while weakening U.S. economic influence?",
+      options: [
+        "Free movement of capital",
+        "Strict protectionist policies",
+        "Isolated trade systems",
+        "Reduction in global trade"
+      ],
+      correct: 0,
+      explanation: "Capital mobility allowed companies to shift production to cheaper regions."
+    },
+    {
+      q: "China’s Belt and Road Initiative (BRI) challenges the U.S. primarily by:",
+      options: [
+        "Building cultural centers",
+        "Creating global infrastructure and economic influence",
+        "Reducing Asian trade",
+        "Cutting technology spending"
+      ],
+      correct: 1,
+      explanation: "BRI extends China’s reach across Asia, Africa, and Europe."
+    },
+    {
+      q: "A major consequence of declining U.S. influence is:",
+      options: [
+        "Stronger global institutions",
+        "Growing multipolarity",
+        "Reduction in regional competition",
+        "Stable balance of power"
+      ],
+      correct: 1,
+      explanation: "As U.S. dominance declines, the world moves toward a multipolar system."
+    } ],
+    "Day 2": [  {
+    q: "According to Sanjaya Baru, India’s strategic autonomy is mainly about:",
+    options: [
+      "Avoiding all foreign partnerships",
+      "Making independent choices regardless of great power pressure",
+      "Aligning fully with the United States",
+      "Maintaining only regional ties"
+    ],
+    correct: 1,
+    explanation: "Strategic autonomy means retaining independence in foreign policy decisions."
+  },
+  {
+    q: "Sanjaya Baru argues that India must navigate the world as:",
+    options: [
+      "A bipolar system dominated by the US and Russia",
+      "A unipolar world dominated by the US",
+      "A multipolar world with rising Asian powers",
+      "An isolated region with no major influences"
+    ],
+    correct: 2,
+    explanation: "He describes the world as shifting toward multipolarity."
+  },
+  {
+    q: "One factor weakening the traditional U.S.-led world order is:",
+    options: [
+      "Decline in global trade",
+      "The rise of China as a challenger",
+      "Lack of technology adoption",
+      "Reduced communication networks"
+    ],
+    correct: 1,
+    explanation: "China’s rise is a major challenge to U.S. dominance."
+  },
+  {
+    q: "C. Raja Mohan argues that India must prepare for:",
+    options: [
+      "A world with declining Asian influence",
+      "Intense competition between major powers in Asia",
+      "Reduced geopolitical activity",
+      "Only maritime challenges"
+    ],
+    correct: 1,
+    explanation: "Asia is becoming the centre of global strategic competition."
+  },
+  {
+    q: "According to Raja Mohan, India’s foreign policy should move from idealism to:",
+    options: ["Isolationism", "Pragmatism", "Complete neutrality", "Cold War alignment"],
+    correct: 1,
+    explanation: "He stresses pragmatic engagement over ideology."
+  },
+  {
+    q: "A key challenge for India in the new global order is:",
+    options: [
+      "Balancing relations with both the U.S. and China",
+      "Ending all regional partnerships",
+      "Reducing military spending",
+      "Focusing only on cultural diplomacy"
+    ],
+    correct: 0,
+    explanation: "Managing ties with both powers is central to India’s strategy."
+  },
+  {
+    q: "Sanjaya Baru emphasizes that India’s economic strength is essential for:",
+    options: [
+      "Cultural diplomacy",
+      "Technological isolation",
+      "National security and global influence",
+      "Reducing global trade"
+    ],
+    correct: 2,
+    explanation: "Economic capability drives military and diplomatic power."
+  },
+  {
+    q: "Raja Mohan argues that India's neighbourhood policy is weakened mainly by:",
+    options: [
+      "Lack of borders",
+      "China’s expanding presence in South Asia",
+      "Decline in India’s population",
+      "Limited natural resources"
+    ],
+    correct: 1,
+    explanation: "China is increasing its influence in India's neighbourhood."
+  },
+  {
+    q: "According to both thinkers, India should:",
+    options: [
+      "Commit to one permanent alliance",
+      "Avoid global markets",
+      "Build partnerships in multiple directions",
+      "Withdraw from regional forums"
+    ],
+    correct: 2,
+    explanation: "They support multi-alignment to maximize national interests."
+  },
+  {
+    q: "Sanjaya Baru describes the U.S.-China rivalry as:",
+    options: [
+      "A temporary disagreement",
+      "The defining geopolitical contest of the century",
+      "A minor regional issue",
+      "A conflict limited to trade"
+    ],
+    correct: 1,
+    explanation: "He sees it as a long-term structural rivalry."
+  },
+  {
+    q: "According to Raja Mohan, India must strengthen its maritime strategy because:",
+    options: [
+      "Most of India’s economy depends on sea routes",
+      "Land borders are irrelevant",
+      "The Indian Ocean faces no competition",
+      "Maritime power is unimportant"
+    ],
+    correct: 0,
+    explanation: "India’s trade and security rely heavily on sea lanes."
+  },
+  {
+    q: "Both Baru and Mohan agree that India’s path to becoming a major power requires:",
+    options: [
+      "A withdrawal from global institutions",
+      "A closed economy",
+      "Greater economic, military, and diplomatic capacity",
+      "Depending solely on Western support"
+    ],
+    correct: 2,
+    explanation: "National capacity-building is essential for great-power status."
+  },
+
+  // ---- 5 Additional MCQs ----
+
+  {
+    q: "Middle powers are defined as countries that:",
+    options: [
+      "Have no influence in global politics",
+      "Are weaker than regional actors",
+      "Are not great powers but still hold significant influence",
+      "Only influence domestic politics"
+    ],
+    correct: 2,
+    explanation: "Middle powers influence global outcomes without being superpowers."
+  },
+  {
+    q: "According to Huntington’s ‘uni-multipolar world’, the system consists of:",
+    options: [
+      "One superpower and no regional powers",
+      "Two equal superpowers",
+      "One superpower and several major regional powers",
+      "Multiple equal superpowers"
+    ],
+    correct: 2,
+    explanation: "Huntington’s model describes one superpower and many regional powers."
+  },
+  {
+    q: "“Multivariate interests” refers to:",
+    options: [
+      "Countries following a single priority",
+      "Countries maintaining strictly ideological interests",
+      "Overlapping and sometimes contradictory national priorities",
+      "Nations refusing to form coalitions"
+    ],
+    correct: 2,
+    explanation: "Nations often have overlapping, conflicting interests."
+  },
+  {
+    q: "Multipolarity in practice is shown when countries:",
+    options: [
+      "Align permanently with only one major power",
+      "Converge on all global issues",
+      "Shift positions and form temporary coalitions based on issues",
+      "Avoid all international organizations"
+    ],
+    correct: 2,
+    explanation: "Issue-based shifting coalitions are a hallmark of multipolarity."
+  },
+  {
+    q: "C. Raja Mohan argues that:",
+    options: [
+      "Multipolarity is firmly established",
+      "The world is moving toward bipolarity led by the US and China",
+      "Middle powers dominate global politics",
+      "Russia is replacing the United States as the sole superpower"
+    ],
+    correct: 1,
+    explanation: "Raja Mohan sees bipolarity emerging, not full multipolarity."
+  
+  } ]
+  
+  },
+  "Week 4": {
+    "Day 1": [  {
+    q: "The People’s Republic of China (PRC) was founded in:",
+    options: ["1937", "1949", "1958", "1966"],
+    correct: 1,
+    explanation: "PRC was founded on 1 October 1949 after Communist victory."
+  },
+  {
+    q: "Mao’s Great Leap Forward (1958–62) resulted in:",
+    options: [
+      "Rapid industrial success",
+      "Improved food production",
+      "A famine causing tens of millions of deaths",
+      "Peaceful rural reforms"
+    ],
+    correct: 2,
+    explanation: "The Great Leap Forward caused a massive famine, killing around 45 million people."
+  },
+  {
+    q: "The Cultural Revolution aimed to:",
+    options: [
+      "Modernize China’s military",
+      "Remove 'bourgeois' elements from society",
+      "Increase foreign investment",
+      "Strengthen universities"
+    ],
+    correct: 1,
+    explanation: "The Cultural Revolution targeted intellectuals and officials accused of being 'bourgeois'."
+  },
+  {
+    q: "Deng Xiaoping’s reforms were based on:",
+    options: [
+      "Strict Maoist ideology",
+      "Total political liberalization",
+      "Pragmatism and market-based reforms",
+      "Eliminating foreign trade"
+    ],
+    correct: 2,
+    explanation: "Deng introduced pragmatic, market-oriented reforms under 'Reform and Opening Up'."
+  },
+  {
+    q: "Special Economic Zones (SEZs) were created to:",
+    options: [
+      "Restrict foreign investment",
+      "Allow foreign capital and promote export-oriented growth",
+      "Promote rural agriculture only",
+      "Replace all state-owned enterprises"
+    ],
+    correct: 1,
+    explanation: "SEZs like Shenzhen attracted foreign investment and boosted exports."
+  },
+  {
+    q: "Under Hu Jintao, China promoted the idea of:",
+    options: [
+      "‘Great Leap Forward 2.0’",
+      "‘One Country, Two Systems’",
+      "A ‘Harmonious Society’ and ‘Peaceful Rise’",
+      "Complete political liberalization"
+    ],
+    correct: 2,
+    explanation: "Hu stressed reducing inequality and presenting China as a peaceful rising power."
+  },
+  {
+    q: "Xi Jinping’s 'Chinese Dream' focuses on:",
+    options: [
+      "Creating a Western-style democracy",
+      "Reviving China’s global greatness through national rejuvenation",
+      "Ending CCP control",
+      "Closing China’s economy"
+    ],
+    correct: 1,
+    explanation: "Xi’s Chinese Dream is centered on the ‘great rejuvenation of the Chinese nation’."
+  }],
+    "Day 2": [ {
+    q: "China’s Leninist one-party system is characterised by:",
+    options: [
+      "Multi-party competition",
+      "A single vanguard party monopolising political power",
+      "Direct democratic elections at the national level",
+      "Independent media and judiciary"
+    ],
+    correct: 1,
+    explanation: "The CCP monopolises political authority and controls all state institutions."
+  },
+  {
+    q: "The “Household Responsibility System” introduced under Deng Xiaoping primarily transformed:",
+    options: [
+      "Urban manufacturing",
+      "Military recruitment",
+      "Agricultural production and rural incomes",
+      "University admissions"
+    ],
+    correct: 2,
+    explanation: "It allowed farmers to keep surplus output, boosting productivity and incomes."
+  },
+  {
+    q: "China’s admission into the World Trade Organization (WTO) in 2001 led to:",
+    options: [
+      "Isolation from global markets",
+      "Weakening of China’s export sector",
+      "Deep integration into the global economy",
+      "Collapse of Chinese state-owned firms"
+    ],
+    correct: 2,
+    explanation: "WTO entry enabled China to become a major global manufacturing power."
+  },
+  {
+    q: "Xi Jinping’s anti-corruption campaign was officially aimed at:",
+    options: [
+      "Eliminating foreign competition",
+      "Targeting only low-level bureaucrats",
+      "Removing both powerful leaders and minor officials (“tigers and flies”)",
+      "Dismantling the CCP"
+    ],
+    correct: 2,
+    explanation: "Xi targeted corruption at all levels of government and the Party."
+  },
+  {
+    q: "The “Century of Humiliation” narrative is used by the CCP to:",
+    options: [
+      "Promote China’s colonial expansion",
+      "Justify the need for national unity and Party leadership",
+      "Support political liberalisation",
+      "Reduce China’s global ambitions"
+    ],
+    correct: 1,
+    explanation: "It strengthens the political legitimacy of CCP rule."
+  },
+  {
+    q: "Xinjiang’s “re-education” system is internationally criticised for:",
+    options: [
+      "Improving Uyghur literacy",
+      "Providing vocational training only",
+      "Mass detention, surveillance, and cultural erasure",
+      "Open democratic participation"
+    ],
+    correct: 2,
+    explanation: "Up to a million Uyghurs are reported to be detained under coercive programmes."
+  },
+  {
+    q: "The 2020 National Security Law in Hong Kong resulted in:",
+    options: [
+      "Restoration of full autonomy",
+      "Strengthening of independent media",
+      "Criminalising dissent and ending political freedoms",
+      "Expansion of legislative voting rights"
+    ],
+    correct: 2,
+    explanation: "The law effectively dismantled Hong Kong’s promised autonomy under 'One Country, Two Systems'."
+  } ],
+  "Day 3": [  {
+    q: "China’s historical “Middle Kingdom” worldview is based on the idea that:",
+    options: [
+      "China is one among many equal civilizations",
+      "China is the natural center of global civilization",
+      "China must avoid all regional engagement",
+      "China historically preferred multipolarity"
+    ],
+    correct: 1,
+    explanation: "Historically, China viewed itself as the central civilization in global order."
+  },
+  {
+    q: "Xi Jinping’s concept of a “Community of Shared Future for Mankind” implies:",
+    options: [
+      "A US-led global order",
+      "A China-centric global governance model",
+      "Isolation from international institutions",
+      "Military disengagement"
+    ],
+    correct: 1,
+    explanation: "The concept signals China’s ambition to shape a China-led world order."
+  },
+  {
+    q: "A major criticism of the Belt and Road Initiative (BRI) is that it:",
+    options: [
+      "Prevents countries from accessing global markets",
+      "Uses only grant-based financial aid",
+      "Creates debt traps and sovereignty risks",
+      "Reduces global infrastructure development"
+    ],
+    correct: 2,
+    explanation: "BRI is criticized for debt dependency, opaque contracts, and sovereignty issues."
+  },
+  {
+    q: "China’s militarisation of artificial islands in the South China Sea helps it:",
+    options: [
+      "Promote regional tourism",
+      "Control major shipping lanes and strategic resources",
+      "Strengthen ASEAN unity",
+      "Reduce naval presence in the Indo-Pacific"
+    ],
+    correct: 1,
+    explanation: "Militarised islands give China control over trade routes and energy reserves."
+  },
+  {
+    q: "The Taiwan issue is considered highly sensitive because:",
+    options: [
+      "Taiwan is China’s largest trading partner",
+      "Taiwan’s democracy contradicts China’s political model",
+      "The US officially recognises Taiwan as an independent nation",
+      "Taiwan has no strategic importance"
+    ],
+    correct: 1,
+    explanation: "Taiwan is a successful democracy & semiconductor hub; reunification is core to CCP ideology."
+  },
+  {
+    q: "China’s technological ambitions under “Made in China 2025” aim to:",
+    options: [
+      "Increase agricultural self-sufficiency",
+      "Dominate advanced sectors like AI, robotics, and aerospace",
+      "Reduce manufacturing capacity",
+      "Expand traditional low-tech exports"
+    ],
+    correct: 1,
+    explanation: "The plan aims to secure dominance in key high-tech industries."
+  },
+  {
+    q: "“Wolf Warrior Diplomacy” refers to:",
+    options: [
+      "China’s withdrawal from global negotiations",
+      "Aggressive, confrontational diplomatic behaviour",
+      "China’s cultural diplomacy programs",
+      "China’s humanitarian relief missions"
+    ],
+    correct: 1,
+    explanation: "It describes China’s increasingly combative diplomatic posture."
+  },
+  {
+    q: "A major component of India’s China challenge is:",
+    options: [
+      "Cooperation in nuclear arms development",
+      "China’s declining interest in South Asia",
+      "Chinese encirclement through ports and partnerships ('String of Pearls')",
+      "India’s military presence in East China Sea"
+    ],
+    correct: 2,
+    explanation: "China’s port network in Gwadar, Hambantota, and Djibouti encircles India strategically."
+  }]
+  },
+  "Week 5": {
+    "Day 1": [ {
+      q: "The post–WWII multilateral system is increasingly viewed as:",
+      options: ["More effective than ever", "Paralysed and outdated", "Completely abolished", "Fully reformed"],
+      correct: 1,
+      explanation: "The multilateral system is seen as paralysed, outdated, and mistrusted."
+    },
+    {
+      q: "The 78th UN General Assembly (2023) theme focused on:",
+      options: ["Expanding nuclear weapons", "Restoring trust and solidarity", "Ending the UN system", "Promoting nationalism"],
+      correct: 1,
+      explanation: "The theme was 'Restoring Trust and Revitalizing Global Solidarity'."
+    },
+    {
+      q: "A major reason multilateralism is in crisis is:",
+      options: ["Too much representation for small nations", "Great power rivalry blocking cooperation", "Overfunding of UN agencies", "Global South refusal to participate"],
+      correct: 1,
+      explanation: "Great power rivalry undermines cooperation."
+    },
+    {
+      q: "The Ukraine War exposed which weakness of the UN Security Council?",
+      options: ["Overuse of peacekeeping", "Paralysis due to Russia’s veto", "Excessive funding", "Too many permanent members"],
+      correct: 1,
+      explanation: "Russia’s veto blocked UNSC action."
+    },
+    {
+      q: "During the Covid-19 pandemic, multilateralism failed due to:",
+      options: ["High vaccine exports", "A 'vaccine apartheid' led by wealthy nations", "Overproduction of vaccines", "WTO rejecting medical patents"],
+      correct: 1,
+      explanation: "Wealthy countries hoarded vaccine doses."
+    },
+    {
+      q: "The WTO dispute settlement system is frozen mainly because:",
+      options: ["China left the WTO", "The US blocked new appellate judges", "Europe ended trade talks", "Africa refused WTO rules"],
+      correct: 1,
+      explanation: "The US blocked the appointment of new judges."
+    }
+  ],
+
+  "Day 2": [
+    {
+      q: "The UNSC’s biggest structural problem is:",
+      options: ["Its large size", "Veto power held by the P5", "Absence of peacekeeping authority", "Lack of rotating members"],
+      correct: 1,
+      explanation: "Veto power makes effective action rare."
+    },
+    {
+      q: "India, Germany, Japan, and Brazil (G4) argue that the UNSC:",
+      options: ["Should be abolished", "No longer reflects current global power realities", "Should eliminate rotating seats", "Must give Europe full control"],
+      correct: 1,
+      explanation: "UNSC does not reflect today’s power balance."
+    },
+    {
+      q: "The IMF is often criticised because its loans:",
+      options: ["Contain no conditions", "Encourage military spending", "Enforce austerity that worsens crises", "Are interest-free"],
+      correct: 2,
+      explanation: "IMF loans require austerity, subsidy cuts, and job losses."
+    },
+    {
+      q: "The World Bank’s structural adjustment programmes in the 1980s–90s:",
+      options: ["Reduced poverty everywhere", "Forced privatisation and subsidy cuts", "Expanded welfare systems", "Focused on debt forgiveness"],
+      correct: 1,
+      explanation: "They forced liberalisation, privatisation, and subsidy cuts in developing countries."
+    },
+    {
+      q: "The WTO’s Doha Round collapsed mainly due to:",
+      options: ["Absence of developing countries", "North–South disagreements on subsidies", "China vetoing proposals", "Poor attendance"],
+      correct: 1,
+      explanation: "Agriculture and subsidy disputes blocked progress."
+    },
+    {
+      q: "China’s growing role in multilateralism includes:",
+      options: ["Rejecting all UN bodies", "Being the 2nd largest contributor to the UN budget", "Ending peacekeeping", "Leaving BRICS and SCO"],
+      correct: 1,
+      explanation: "China funds UN operations and leads major UN agencies."
+    }],
+    "Day 3": [  {
+    q: "Non-Alignment under Nehru primarily meant:",
+    options: [
+      "Supporting the US",
+      "Supporting the USSR",
+      "Avoiding alignment with Cold War blocs",
+      "Rejecting all diplomacy"
+    ],
+    correct: 2,
+    explanation: "NAM meant maintaining independence and avoiding both US and USSR blocs."
+  },
+  {
+    q: "Which principle is not one of the Panchsheel Principles (1954)?",
+    options: [
+      "Mutual respect for sovereignty",
+      "Non-interference",
+      "Collective military defence pact",
+      "Peaceful coexistence"
+    ],
+    correct: 2,
+    explanation: "Panchsheel does not include military defence pacts."
+  },
+  {
+    q: "Nehru’s biggest foreign policy failure was:",
+    options: [
+      "Ignoring Europe",
+      "Over-idealism toward China leading to the 1962 war",
+      "Rejecting NAM",
+      "Economic overreach"
+    ],
+    correct: 1,
+    explanation: "Nehru misread China’s intentions, leading to India’s defeat in 1962."
+  },
+  {
+    q: "Taking the Kashmir issue to the UN in 1948 is considered a mistake because:",
+    options: [
+      "UN refused to accept India’s membership",
+      "It internationalised a bilateral issue",
+      "It weakened Pakistan’s position",
+      "It strengthened India’s military"
+    ],
+    correct: 1,
+    explanation: "Taking the issue to the UN unnecessarily internationalised Kashmir."
+  },
+  {
+    q: "The 1971 Bangladesh Liberation War demonstrated:",
+    options: [
+      "India’s inability to use military power",
+      "India’s capability to reshape South Asian geopolitics",
+      "India’s neutrality during conflicts",
+      "India’s dependence on foreign armies"
+    ],
+    correct: 1,
+    explanation: "India’s decisive victory reshaped regional geopolitics."
+  },
+  {
+    q: "India’s 1974 nuclear test ('Smiling Buddha') was significant because:",
+    options: [
+      "It aligned India with NATO",
+      "It marked India’s entry into the nuclear club",
+      "It led to immediate global recognition",
+      "It reduced tensions with China"
+    ],
+    correct: 1,
+    explanation: "The nuclear test demonstrated strategic autonomy and capability."
+  },
+  {
+    q: "Operation Cactus (1988) in the Maldives is remembered as:",
+    options: [
+      "A diplomatic blunder",
+      "A failure to intervene",
+      "A successful regional stabilisation operation",
+      "A naval disaster"
+    ],
+    correct: 2,
+    explanation: "India quickly foiled a coup and stabilised the Maldives."
+  },
+  {
+    q: "India’s intervention in Sri Lanka (IPKF) is criticised because:",
+    options: [
+      "India refused to withdraw",
+      "India ended the civil war",
+      "It became a costly entanglement with minimal strategic gain",
+      "The intervention was fully successful"
+    ],
+    correct: 2,
+    explanation: "IPKF became a costly intervention with little strategic benefit."
+  },
+  {
+    q: "The 1991 economic crisis reshaped India’s foreign policy by:",
+    options: [
+      "Increasing dependence on USSR",
+      "Strengthening socialist alliances",
+      "Shifting India toward liberalisation and global integration",
+      "Ending ties with the US"
+    ],
+    correct: 2,
+    explanation: "Liberalisation pushed India toward global markets and pragmatic diplomacy."
+  },
+  {
+    q: "Post–Cold War foreign policy became more:",
+    options: ["Ideological", "Socialist", "Pragmatic and interest-driven", "Aligned with USSR"],
+    correct: 2,
+    explanation: "Indian foreign policy shifted from ideology to pragmatism after 1991."
+  }]
+  },
+  "Week 6": {
+    "Day 1": [  {
+      q: "India’s foreign policy shift after 1991 is described as moving from:",
+      options: ["Assertion to Survival", "Isolation to Neutrality", "Survival to Assertion", "Alliance to Non-alignment"],
+      correct: 2,
+      explanation: "Post-1991 reforms allowed India to shift from survival mode to assertive foreign policy."
+    },
+    {
+      q: "The 'unipolar moment' refers to:",
+      options: ["China dominating world order", "India as sole superpower", "US dominance after the Cold War", "Russia leading global trade"],
+      correct: 2,
+      explanation: "The unipolar moment was marked by US dominance after the Cold War."
+    },
+    {
+      q: "Vajpayee’s 1998 Pokhran-II tests were significant because they:",
+      options: ["Ended India's nuclear program", "Declared India a nuclear weapons state", "Joined India to NATO", "Reduced global sanctions"],
+      correct: 1,
+      explanation: "Pokhran-II established India as a nuclear weapons state."
+    },
+    {
+      q: "Vajpayee’s Lahore Bus diplomacy was undermined due to:",
+      options: ["A US embargo", "A Chinese border conflict", "Pakistan’s Kargil infiltration", "India withdrawing from SAARC"],
+      correct: 2,
+      explanation: "Kargil conflict undermined diplomatic outreach."
+    },
+    {
+      q: "A major achievement of Manmohan Singh’s foreign policy was:",
+      options: ["Border settlement with China", "India–US Civil Nuclear Deal (2005)", "Withdrawal from WTO", "Ending SAARC"],
+      correct: 1,
+      explanation: "The nuclear deal ended India's nuclear isolation."
+    },
+    {
+      q: "Manmohan Singh’s biggest criticism was:",
+      options: ["Aggressive diplomacy", "Over-confidence in geopolitics", "Timidity in strategic affairs", "Cutting ties with neighbours"],
+      correct: 2,
+      explanation: "He was often seen as hesitant, especially after 26/11."
+    },
+    {
+      q: "One reason India lost influence in its neighbourhood during the MMS era was:",
+      options: ["High military spending", "Frequent visits to neighbours", "Rare PM visits to key neighbours", "Excessive sanctions"],
+      correct: 2,
+      explanation: "Lack of high-level diplomatic engagement reduced India's influence."
+    }
+  ],
+
+  "Day 2": [
+    {
+      q: "Modi’s foreign policy is best described as:",
+      options: ["Isolationist", "Ideology-driven", "Strategic Autonomy 2.0", "Alliance dependent"],
+      correct: 2,
+      explanation: "Strategic Autonomy 2.0 defines Modi-era diplomacy."
+    },
+    {
+      q: "Multi-alignment under Modi means:",
+      options: ["Choosing only the US", "Aligning with USSR", "Engaging all major powers simultaneously", "Rejecting great powers"],
+      correct: 2,
+      explanation: "Multi-alignment = engaging US, Russia, EU, West Asia, Global South."
+    },
+    {
+      q: "Neighbourhood First focuses primarily on:",
+      options: ["Europe & North America", "Central Asia", "South Asia & Indian Ocean", "South America"],
+      correct: 2,
+      explanation: "It prioritises India's immediate neighbourhood."
+    },
+    {
+      q: "The main reason India faces challenges in its neighbourhood is:",
+      options: ["Too many Indian bases", "Lack of energy resources", "China’s growing influence", "Weak border roads"],
+      correct: 2,
+      explanation: "China’s BRI and political influence challenge India's primacy."
+    },
+    {
+      q: "Pakistan is considered a long-term challenge because:",
+      options: ["It has no military", "It is economically stable", "Its identity is built in opposition to India", "It has no extremist groups"],
+      correct: 2,
+      explanation: "Pakistan’s identity and military dominance fuel anti-India stance."
+    },
+    {
+      q: "India’s response to Pakistan-based terrorism includes:",
+      options: ["Increasing dialogue", "Accepting nuclear blackmail", "Surgical strikes & Balakot", "Ending diplomacy"],
+      correct: 2,
+      explanation: "India took kinetic action like surgical strikes and Balakot."
+    },
+    {
+      q: "India’s approach to US–China rivalry is:",
+      options: ["Fully aligned with US", "Totally neutral", "Balancing through Quad without alliance", "Aligned with China"],
+      correct: 2,
+      explanation: "India supports Quad but avoids formal military alliances."
+    } ],
+    
+  }
+        
+        
+
+      },
+      
+      
+      // Other modules and weeks can be added here later.
+     environmental: {
+      "Week 8": {
+        "Day 1": [
+            {
+      q: "Climate is defined as the average weather pattern measured over at least:",
+      options: ["10 years", "20 years", "30 years", "50 years"],
+      correct: 2
+    },
+    {
+      q: "Which gas has the highest global warming potential?",
+      options: ["CO₂", "Methane", "Nitrous oxide", "Fluorinated gases"],
+      correct: 3
+    },
+    {
+      q: "Earth releases outgoing energy as:",
+      options: ["UV radiation", "Infrared radiation", "Visible light", "X-rays"],
+      correct: 1
+    },
+    {
+      q: "The main cause of global warming is:",
+      options: ["Volcanoes", "Burning fossil fuels", "Solar flares", "Ocean currents"],
+      correct: 1
+    },
+    {
+      q: "Urban Heat Islands occur due to:",
+      options: ["More trees", "High reflectivity of surfaces", "Buildings absorbing heat", "More rainfall"],
+      correct: 2
+    },
+    {
+      q: "Milankovitch cycles are related to:",
+      options: ["Earth’s orbit", "Tides", "Mountain formation", "Rainfall"],
+      correct: 0
+    },
+    {
+      q: "A major natural source of methane is:",
+      options: ["Cars", "Livestock", "Forests", "Jet streams"],
+      correct: 1
+    },
+    {
+      q: "The cryosphere includes:",
+      options: ["Forests", "Oceans", "Ice sheets & glaciers", "Lakes"],
+      correct: 2
+    },
+    {
+      q: "Oceans absorb how much of the excess trapped heat?",
+      options: ["20%", "40%", "60%", "90%"],
+      correct: 3
+    },
+    {
+      q: "Carbon isotope evidence shows that CO₂ comes from:",
+      options: ["Volcanoes", "Forests", "Fossil fuels", "The ocean"],
+      correct: 2
+    },
+    {
+      q: "Jet streams weaken because:",
+      options: ["Poles cool faster", "Poles warm faster", "Equator cools", "Oceans shrink"],
+      correct: 1
+    },
+    {
+      q: "Weakened jet streams cause:",
+      options: ["Fast-moving storms", "Weather staying longer in one place", "More snowfall globally", "Instant cooling"],
+      correct: 1
+    },
+    {
+      q: "Which region is MOST climate-vulnerable?",
+      options: ["Europe", "North America", "South Asia", "Antarctica"],
+      correct: 2
+    },
+    {
+      q: "Sea-level rise is caused by:",
+      options: ["Volcanic eruptions", "Thermal expansion + melting ice", "Wind speed", "Less clouds"],
+      correct: 1
+    },
+    {
+      q: "Which crop loses ~7% yield per 1°C rise?",
+      options: ["Wheat", "Maize", "Sugarcane", "Rice"],
+      correct: 0
+    }
+        ],
+        "Day 2": [ {
+      q: "Which greenhouse gas is MOST responsible for warming overall?",
+      options: ["Nitrogen", "Helium", "CO₂", "Neon"],
+      correct: 2
+    },
+    {
+      q: "Ice cores help scientists know:",
+      options: ["River flow", "Past CO₂ levels", "Earthquake history", "Monsoon wind speed"],
+      correct: 1
+    },
+    {
+      q: "Which factor causes stronger cyclones?",
+      options: ["Cold oceans", "Warmer oceans", "Fewer clouds", "Deeper lakes"],
+      correct: 1
+    },
+    {
+      q: "Hadley cell expansion leads to:",
+      options: ["More deserts", "More snowfall", "More trees", "More oceans"],
+      correct: 0
+    },
+    {
+      q: "Permafrost melting releases:",
+      options: ["Nitrogen", "Oxygen", "CO₂ & methane", "Hydrogen"],
+      correct: 2
+    },
+    {
+      q: "Biodiversity loss increases when:",
+      options: ["Species adapt quickly", "Habitats shift too fast", "CO₂ reduces", "Rain increases"],
+      correct: 1
+    },
+    {
+      q: "Floods caused by melting glacial lakes are called:",
+      options: ["Tsunamis", "GLOFs", "Storm surges", "Cloudbursts"],
+      correct: 1
+    },
+    {
+      q: "Which of these increases vector-borne diseases?",
+      options: ["Cooler climate", "Warmer + humid climate", "Mountain winds", "Ocean currents"],
+      correct: 1
+    },
+    {
+      q: "Ocean acidification happens because:",
+      options: ["Ocean releases CO₂", "Ocean absorbs CO₂", "Ocean freezes", "Sunlight increases"],
+      correct: 1
+    },
+    {
+      q: "The “energy balance” refers to:",
+      options: [
+        "Earth absorbing and radiating equal heat",
+        "Volcanoes cooling Earth",
+        "Oceans heating air",
+        "Sun stopping radiation"
+      ],
+      correct: 0
+    },
+    {
+      q: "Which natural phenomenon affects climate by changing ocean surface temperatures?",
+      options: ["Earthquake waves", "El Niño", "Monsoon bursts", "Jet streams"],
+      correct: 1
+    },
+    {
+      q: "Which human activity causes the MOST CO₂ emissions?",
+      options: ["Transport", "Burning fossil fuels for power + industry", "Agriculture", "Waste management"],
+      correct: 1
+    },
+    {
+      q: "Which region warms faster than Earth on average?",
+      options: ["Antarctica", "Equator", "Arctic", "Sahara"],
+      correct: 2
+    },
+    {
+      q: "Which is a major impact of warming oceans?",
+      options: ["Weaker cyclones", "Stronger cyclones", "Less storms", "More snowfall"],
+      correct: 1
+    },
+    {
+      q: "The last decade has been:",
+      options: ["The coldest on record", "Colder than the 1980s", "The hottest on record", "Same as 1950"],
+      correct: 2
+    } ],
+
+
+    },
+
+"Week 9": {
+        "Day 1": [{
+    q: "Endemic species are those that:",
+    options: ["Live in all continents", "Are found only in a specific region", "Migrate seasonally", "Are always endangered"],
+    correct: 1
+  },
+  {
+    q: "Wildlife populations globally declined by how much between 1970–2020?",
+    options: ["25%", "50%", "73%", "90%"],
+    correct: 2
+  },
+  {
+    q: "Which ecosystem showed the WORST population decline?",
+    options: ["Marine", "Terrestrial", "Freshwater", "Tundra"],
+    correct: 2
+  },
+  {
+    q: "A biome refers to:",
+    options: [
+      "A single species",
+      "A group of populations",
+      "Large ecological regions defined by climate & vegetation",
+      "Temporary seasonal habitats"
+    ],
+    correct: 2
+  },
+  {
+    q: "Genetic diversity refers to:",
+    options: ["Number of habitats", "Variety of DNA within species", "Number of predators", "Interactions between species"],
+    correct: 1
+  },
+  {
+    q: "Overexploitation refers to:",
+    options: ["Excess rainfall", "Unsustainable hunting, fishing, and logging", "Genetic modification", "Reforestation programs"],
+    correct: 1
+  },
+  {
+    q: "Which region has seen the steepest biodiversity decline?",
+    options: ["North America", "Europe", "Asia", "Latin America & Caribbean"],
+    correct: 3
+  },
+  {
+    q: "A biodiversity hotspot must have at least:",
+    options: [
+      "500 endemic species",
+      "5,000 endemic animal species",
+      "1,500 endemic plant species + 70% habitat loss",
+      "50% forest cover"
+    ],
+    correct: 2
+  },
+  {
+    q: "Ecosystem collapse occurs when:",
+    options: [
+      "One species migrates",
+      "Rainfall increases",
+      "Stress pushes ecosystems beyond a tipping point",
+      "New species are discovered"
+    ],
+    correct: 2
+  },
+  {
+    q: "The strongest biodiversity decline is seen in:",
+    options: ["Marine ecosystems", "Terrestrial systems", "Freshwater systems", "Mountain ecosystems"],
+    correct: 2
+  }],
+        "Day 2": [{
+    q: "Which of the following BEST defines pollution?",
+    options: [
+      "Waste generated from households",
+      "Contamination that causes harmful effects on environment and health",
+      "Natural process of soil formation",
+      "Evaporation of chemicals"
+    ],
+    correct: 1
+  },
+  {
+    q: "How much plastic waste accumulated globally between 1950–2015?",
+    options: ["2.2 billion tons", "4.1 billion tons", "6.3 billion tons", "9.0 billion tons"],
+    correct: 2
+  },
+  {
+    q: "What percentage of global plastic pollution comes from macro-plastics?",
+    options: ["40%", "60%", "70%", "88%"],
+    correct: 3
+  },
+  {
+    q: "Microplastics in the air mainly come from:",
+    options: ["Volcanoes", "Textiles and carpets", "Forest fires", "Ocean waves"],
+    correct: 1
+  },
+  {
+    q: "Marine plastic pollution kills approximately how many marine species each year?",
+    options: ["5,000", "20,000", "50,000", "100,000+"],
+    correct: 3
+  },
+  {
+    q: "Which of the following chemicals found in plastics is linked to reproductive and developmental disorders?",
+    options: ["Sodium chloride", "BPA & phthalates", "Carbon dioxide", "Sulfates"],
+    correct: 1
+  },
+  {
+    q: "What percentage of e-waste is properly recycled globally?",
+    options: ["10%", "22.3%", "40%", "60%"],
+    correct: 1
+  },
+  {
+    q: "The largest informal e-waste dismantling hub in India is located in:",
+    options: ["Chennai", "Bengaluru", "Seelampur, Delhi", "Jaipur"],
+    correct: 2
+  },
+  {
+    q: "Point source pollution refers to:",
+    options: [
+      "Pollution from widespread unknown sources",
+      "Pollution from single identifiable sources",
+      "Pollution carried only by wind",
+      "Pollution from forests"
+    ],
+    correct: 1
+  },
+  {
+    q: "Noise pollution primarily causes:",
+    options: ["Higher soil fertility", "Hearing loss & high blood pressure", "Better sleep", "Faster plant growth"],
+    correct: 1
+  }],
+        
+},
+"Week 10": {
+        "Day 1": [{
+    q: "The Brundtland Commission (1987) defines sustainability as:",
+    options: [
+      "Reducing pollution only",
+      "Meeting present needs without harming future generations",
+      "Increasing economic growth at any cost",
+      "Conserving biodiversity only"
+    ],
+    correct: 1
+  },
+  {
+    q: "The three pillars of sustainability are:",
+    options: ["Air, Water, Soil", "Technology, Growth, Equity", "People, Planet, Prosperity", "Forests, Rivers, Oceans"],
+    correct: 2
+  },
+  {
+    q: "Intergenerational equity means:",
+    options: [
+      "Everyone should plant trees",
+      "Present generations must protect resources for future generations",
+      "Cities must grow vertically",
+      "Only the rich should pay for climate solutions"
+    ],
+    correct: 1
+  },
+  {
+    q: "Circular economy focuses on:",
+    options: ["Take → Make → Dispose", "Reuse, recycle, eliminate waste", "Increasing fossil fuel use", "Exporting waste"],
+    correct: 1
+  },
+  {
+    q: "Which footprint measures how much productive land/water we use?",
+    options: ["Carbon footprint", "Water footprint", "Ecological footprint", "Land-use footprint"],
+    correct: 2
+  },
+  {
+    q: "The Environmental Performance Index (EPI) measures:",
+    options: [
+      "Carbon taxes",
+      "Environmental health & ecosystem vitality",
+      "Energy imports",
+      "Forest density only"
+    ],
+    correct: 1
+  },
+  {
+    q: "The SDG Index tracks progress on:",
+    options: ["Only climate goals", "17 Sustainable Development Goals", "Trade and exports", "University rankings"],
+    correct: 1
+  },
+  {
+    q: "Life Cycle Assessment (LCA) measures:",
+    options: [
+      "Only product price",
+      "Environmental impact from raw material extraction to disposal",
+      "Company profits",
+      "Forest cover"
+    ],
+    correct: 1
+  },
+  {
+    q: "Green jobs are created mainly in:",
+    options: ["Coal mining", "Renewable energy, restoration, circular industries", "Tobacco industry", "Gambling sector"],
+    correct: 1
+  },
+  {
+    q: "Mission LiFE focuses on:",
+      options: ["Luxury consumption", "Sustainable living and behavioural change", "Export promotion", "Banning all energy use"],
+      correct: 1
+  }],
+        
+        "Day 3": [{
+    q: "The ecological footprint measures:",
+    options: [
+      "Atmospheric CO₂ levels",
+      "Land and water required to sustain your lifestyle",
+      "Your total daily calorie intake",
+      "Surface temperature changes"
+    ],
+    correct: 1
+  },
+  {
+    q: "Overshoot Day refers to:",
+    options: [
+      "The hottest day of the year",
+      "The day humanity uses all resources Earth can regenerate in a year",
+      "The day monsoon begins",
+      "A UN climate conference date"
+    ],
+    correct: 1
+  },
+  {
+    q: "A high ecological footprint usually indicates:",
+    options: [
+      "Low resource use",
+      "High personal or national consumption",
+      "Reduced carbon emissions",
+      "Lower environmental impact"
+    ],
+    correct: 1
+  },
+  {
+    q: "Which category contributes MOST to footprint for most people?",
+    options: ["Space travel", "Food, housing, transport", "Jewelry and accessories", "Clothing only"],
+    correct: 1
+  },
+  {
+    q: "A person needing “3 Earths” means:",
+    options: [
+      "They travel a lot",
+      "Their lifestyle requires three times Earth’s biocapacity",
+      "They eat too much sugar",
+      "They use too many gadgets"
+    ],
+    correct: 1
+  },
+  {
+    q: "Which behaviour change MOST reduces ecological footprint?",
+    options: [
+      "Buying new phones every year",
+      "Eating more meat daily",
+      "Using public transport / reducing car travel",
+      "Increasing AC usage"
+    ],
+    correct: 2
+  },
+  {
+    q: "What does a large food footprint usually indicate?",
+    options: [
+      "More plant-based eating",
+      "High consumption of meat/dairy and processed foods",
+      "Drinking more water",
+      "Eating locally grown vegetables"
+    ],
+    correct: 1
+  },
+  {
+    q: "Why is reflection part of this activity?",
+    options: [
+      "To calculate BMI",
+      "To connect personal choices with global sustainability challenges",
+      "To practice handwriting",
+      "To prepare for drawing"
+    ],
+    correct: 1
+  },
+  {
+    q: "Which habit change has the SMALLEST impact on reducing footprint?",
+    options: [
+      "Avoiding single-use plastics",
+      "Switching off devices when not in use",
+      "Driving long distances daily",
+      "Eating meat-heavy diet"
+    ],
+    correct: 1
+  },
+  {
+    q: "The activity aims to help students:",
+    options: [
+      "Take a written exam",
+      "Understand their personal environmental impact",
+      "Learn coding",
+      "Memorise climate treaties"
+    ],
+    correct: 1
+  }],
+},
+},
+economic: {
+        "Week 11": {
+          "Day 1": [{q: "GDP refers to:",
+    options: [
+      "Total value of exported goods only",
+      "Total monetary value of final goods & services within a country",
+      "Total savings of households",
+      "Total value of imports"
+    ],
+    correct: 1
+  },
+  {
+    q: "International trade refers to:",
+    options: [
+      "Exchange of goods within the same state",
+      "Exchange of goods & services across national borders",
+      "Only import of food products",
+      "Only export of manufactured goods"
+    ],
+    correct: 1
+  },
+  {
+    q: "A key difference between internal and international trade is:",
+    options: [
+      "Internal trade uses ships",
+      "International trade has currency differences",
+      "Internal trade requires visas",
+      "International trade uses more trucks"
+    ],
+    correct: 1
+  },
+  {
+    q: "Factor mobility is low in international trade mainly because:",
+    options: [
+      "No demand for labour abroad",
+      "Cultural, legal & political barriers",
+      "High food prices",
+      "Countries have same policies"
+    ],
+    correct: 1
+  },
+  {
+    q: "Mobility of goods is restricted across borders due to:",
+    options: [
+      "Free markets",
+      "Natural barriers only",
+      "Tariffs, quotas, exchange controls, non-tariff barriers",
+      "Lack of shipping companies"
+    ],
+    correct: 2
+  },
+  {
+    q: "Which is an advantage of international trade?",
+    options: [
+      "Reduced competition",
+      "Export diversification",
+      "Fewer business opportunities",
+      "Lower quality of goods"
+    ],
+    correct: 1
+  },
+  {
+    q: "According to Panagariya, trade accelerates growth through:",
+    options: [
+      "Reducing labour force",
+      "Specialisation, scale, technology, competition",
+      "Stopping imports",
+      "Increasing taxes"
+    ],
+    correct: 1
+  },
+  {
+    q: "Britain’s rise during the Industrial Revolution was supported by:",
+    options: [
+      "Self-sufficiency",
+      "International trade with neighbours & colonies",
+      "Military expansion alone",
+      "Gold mining"
+    ],
+    correct: 1
+  },
+  {
+    q: "Since 1990, trade has increased incomes by:",
+    options: [
+      "5% globally",
+      "10% globally",
+      "24% globally and 50% for poorest 40%",
+      "80% globally"
+    ],
+    correct: 2
+  },
+  {
+    q: "South Korea’s GDP per capita increased from $82 (1960) to:",
+    options: ["$500", "$3,000", "$11,347 by 1995", "$80,000"],
+    correct: 2
+  },
+  {
+    q: "By 2023, South Korea’s trade (exports + imports) as % of GDP reached:",
+    options: ["10%", "25%", "88%", "120%"],
+    correct: 2
+  }],
+          "Day 2": [{
+    q: "Global trade increased from about US$ 4 trillion in 1979 to:",
+    options: ["US$ 20 trillion", "US$ 40 trillion", "US$ 65.5 trillion", "US$ 80 trillion"],
+    correct: 2
+  },
+  {
+    q: "Asia’s share of global merchandise exports increased from 16% (1950) to:",
+    options: ["25%", "35%", "43%", "55%"],
+    correct: 2
+  },
+  {
+    q: "Which country drove the rise of Asia’s export dominance?",
+    options: ["India", "Japan", "China", "South Korea"],
+    correct: 2
+  },
+  {
+    q: "Trade in services grew faster than goods mainly because of:",
+    options: ["Cheaper raw materials", "Trade wars", "Technology & liberalization", "Lack of shipping constraints"],
+    correct: 2
+  },
+  {
+    q: "The WTO was created after which negotiation round?",
+    options: ["Geneva Round", "Tokyo Round", "Uruguay Round", "Doha Round"],
+    correct: 2
+  },
+  {
+    q: "The WTO’s Most Favored Nation (MFN) principle means:",
+    options: [
+      "Countries favor domestic firms",
+      "All trading partners must receive equal treatment",
+      "Trade is restricted to allies only",
+      "The poorest countries get special access"
+    ],
+    correct: 1
+  },
+  {
+    q: "What has caused WTO dispute settlement paralysis?",
+    options: [
+      "China’s export subsidies",
+      "EU’s carbon regulations",
+      "U.S. blocking new Appellate Body judges",
+      "Oil price instability"
+    ],
+    correct: 2
+  },
+  {
+    q: "The number of RTAs in force as of 2025 is approximately:",
+    options: ["75", "150", "250", "375"],
+    correct: 3
+  },
+  {
+    q: "Green protectionism refers to:",
+    options: [
+      "Building national parks",
+      "Using environmental rules to restrict imports",
+      "Banning plastic in trade",
+      "Promoting tree plantation credits"
+    ],
+    correct: 1
+  },
+  {
+    q: "The EU’s Carbon Border Adjustment Mechanism (CBAM) acts like:",
+    options: ["A subsidy", "A carbon rebate", "A tariff on high-emission imports", "A carbon market"],
+    correct: 2
+  },
+  {
+    q: "Which event worsened geopolitical trade fragmentation?",
+    options: ["Brexit", "Russia–Ukraine war", "Olympics 2024", "Asian financial crisis"],
+    correct: 1
+  },
+  {
+    q: "Localised industrial policies like CHIPS Act aim to:",
+    options: [
+      "Expand maritime trade",
+      "Re-shore key manufacturing industries",
+      "Reduce tariffs on imports",
+      "Support only agricultural exports"
+    ],
+    correct: 1
+  }],
+
+        },
+        "Week 12": {
+          "Day 1": [{
+    q: "India’s share in world trade increased from 0.6% in 1990 to ______ in 2024.",
+    options: ["1.2%", "2.0%", "2.7%", "3.5%"],
+    correct: 2
+  },
+  {
+    q: "India’s total trade in 2024 (goods + services) reached approximately:",
+    options: ["US$ 200 billion", "US$ 800 billion", "US$ 1.75 trillion", "US$ 3 trillion"],
+    correct: 2
+  },
+  {
+    q: "India’s trade-to-GDP ratio rose from 11% in 1960 to around ______ in 2024.",
+    options: ["20%", "30%", "45%", "60%"],
+    correct: 2
+  },
+  {
+    q: "India was the 18th largest exporter and 9th largest importer in 2024 because:",
+    options: [
+      "Exports grew faster than imports",
+      "Imports grew faster than exports",
+      "Both remained stagnant",
+      "Services declined"
+    ],
+    correct: 1
+  },
+  {
+    q: "Which was India’s top merchandise export category in 2024?",
+    options: ["Textiles", "Fuels", "Transport equipment", "Wood products"],
+    correct: 1
+  },
+  {
+    q: "In 2024, which category dominated India’s merchandise imports?",
+    options: ["Food products", "Stone/Glass", "Fuels", "Footwear"],
+    correct: 2
+  },
+  {
+    q: "India’s services exports surplus increased to about ______ in 2024.",
+    options: ["US$ 10 billion", "US$ 50 billion", "US$ 106 billion", "US$ 200 billion"],
+    correct: 2
+  }],
+          "Day 2": [{
+    q: "Pre-1991 India’s trade policy was dominated by:",
+    options: ["Zero tariffs", "Deep FTAs", "Protectionism & License Raj", "Export-led growth"],
+    correct: 2
+  },
+  {
+    q: "What triggered India’s 1991 liberalization reforms?",
+    options: ["Trade war", "Oil boom", "Balance-of-payments crisis", "WTO requirement"],
+    correct: 2
+  },
+  {
+    q: "Post-1991, India reduced average manufacturing tariffs from 150% to about:",
+    options: ["90%", "50%", "12%", "2%"],
+    correct: 2
+  },
+  {
+    q: "India did NOT join RCEP mainly because of:",
+    options: [
+      "Lack of interest in exports",
+      "Dispute with ASEAN",
+      "Fear of Chinese import surge",
+      "WTO objections"
+    ],
+    correct: 2
+  },
+  {
+    q: "After 2018, India’s trade policy became more:",
+    options: ["Liberal", "Protectionist (tariff hikes)", "Export-subsidized", "Focused on agriculture"],
+    correct: 1
+  },
+  {
+    q: "India’s recent FTAs target which group the MOST?",
+    options: ["Only neighbours", "Oil-exporting countries", "Developed economies (EU, UK, EFTA)", "Latin America"],
+    correct: 2
+  },
+  {
+    q: "India’s goal of becoming a developed country by 2047 depends heavily on:",
+    options: ["Defence spending", "Domestic subsidies", "External trade performance", "Tourism"],
+    correct: 2
+  }],
+
+       
+        },
+        
+        },
+        technological: {
+            "Week 12": {
+          "Day 3": [{
+    q: "An algorithm is defined as:",
+    options: [
+      "A random output generator",
+      "A step-by-step instruction set for decision making",
+      "A computer virus",
+      "A type of AI hardware"
+    ],
+    correct: 1
+  },
+  {
+    q: "Machine Learning allows computers to:",
+    options: [
+      "Copy human emotions",
+      "Learn patterns from data without explicit programming",
+      "Self-destruct malicious files",
+      "Replace all human intelligence"
+    ],
+    correct: 1
+  },
+  {
+    q: "The MAIN reason AI has become widely accessible is:",
+    options: [
+      "Global population growth",
+      "Democratisation of AI resources (hardware, software, data)",
+      "Decline in internet usage",
+      "Strict government bans"
+    ],
+    correct: 1
+  },
+  {
+    q: "AutoML helps AI development by:",
+    options: [
+      "Generating electricity",
+      "Automating most of the machine learning workflow",
+      "Replacing all coders",
+      "Creating robot hardware"
+    ],
+    correct: 1
+  },
+  {
+    q: "Overfitting in AI means:",
+    options: [
+      "AI ignores the training data",
+      "AI learns training data too specifically and fails in real-world tests",
+      "AI uses outdated hardware",
+      "AI repeats wrong answers intentionally"
+    ],
+    correct: 1
+  },
+  {
+    q: "Which example shows bias in AI?",
+    options: [
+      "A robot cleaning floor",
+      "Amazon’s hiring AI preferring male candidates",
+      "A calculator doing addition",
+      "Airplanes using autopilot"
+    ],
+    correct: 1
+  },
+  {
+    q: "A major danger of deepfakes is:",
+    options: [
+      "Increasing movie length",
+      "Damaging reputations & misleading voters",
+      "Improving camera apps",
+      "Reducing internet usage"
+    ],
+    correct: 1
+  },
+  {
+    q: "AI-driven job displacement mainly affects:",
+    options: [
+      "Only CEOs",
+      "Only the entertainment industry",
+      "Repetitive jobs in manufacturing, agriculture, and services",
+      "Only government jobs"
+    ],
+    correct: 2
+  },
+  {
+    q: "A major global security risk of AI is:",
+    options: [
+      "Slow internet",
+      "Autonomous weapons acting without human control",
+      "Increase in taxes",
+      "Lack of phone storage"
+    ],
+    correct: 1
+  },
+  {
+    q: "Kartik Hosanagar’s framework for responsible AI includes:",
+    options: [
+      "Surveillance, automation, monetization",
+      "User control, transparency, audits",
+      "Deletion, encryption, training",
+      "Reward, punishment, regulation"
+    ],
+    correct: 1
+  }]
+        },
+        "Week 13": {
+          "Day 1": [{
+    q: "The goal of the activity is to:",
+    options: [
+      "Write an exam",
+      "Understand a major global tech challenge and explain why it is urgent",
+      "Learn programming languages",
+      "Memorise AI tools"
+    ],
+    correct: 1
+  },
+  {
+    q: "The classroom task requires students to deliver:",
+    options: ["A 10-minute debate", "A 5-minute pitch on a chosen tech challenge", "A written report", "A poster presentation"],
+    correct: 1
+  },
+  {
+    q: "One criterion for evaluating the challenge pitch is:",
+    options: ["Colour of the slides", "Simplicity in defining the threat", "Number of citations", "Amount of animations"],
+    correct: 1
+  },
+  {
+    q: "A technology becomes a global challenge if it:",
+    options: ["Is expensive", "Crosses borders and cannot be solved by one country", "Is used only in universities", "Has no economic value"],
+    correct: 1
+  },
+  {
+    q: "A good pitch must include:",
+    options: ["A celebrity quote", "A real-world example or case study", "A song", "A joke"],
+    correct: 1
+  },
+  {
+    q: "Cyberattacks on critical infrastructure can:",
+    options: [
+      "Improve digital payments",
+      "Paralyse grids, hospitals & financial systems",
+      "Reduce misinformation",
+      "Increase birth rates"
+    ],
+    correct: 1
+  },
+  {
+    q: "Deepfakes are mainly a threat because they:",
+    options: [
+      "Improve movie quality",
+      "Spread misinformation & undermine trust",
+      "Help in medical imaging",
+      "Reduce the need for cameras"
+    ],
+    correct: 1
+  },
+  {
+    q: "CRISPR technology can be misused by:",
+    options: [
+      "Improving smartphone storage",
+      "Creating harmful traits or dangerous modifications",
+      "Increasing server speed",
+      "Enhancing Wi-Fi signals"
+    ],
+    correct: 1
+  },
+  {
+    q: "Synthetic biology risks include:",
+    options: ["Slow internet", "Accidental lab leaks and easy DNA modification", "Lack of computer chips", "Shortage of satellites"],
+    correct: 1
+  },
+  {
+    q: "Anti-Satellite (ASAT) weapons pose a danger because they:",
+    options: [
+      "Increase crop yields",
+      "Destroy satellites & create space debris",
+      "Improve GPS accuracy",
+      "Lower rocket costs"
+    ],
+    correct: 1
+  },
+  {
+    q: "Quantum computing threatens security by:",
+    options: [
+      "Improving encryption",
+      "Breaking current encryption systems",
+      "Fixing ransomware",
+      "Making passwords longer"
+    ],
+    correct: 1
+  },
+  {
+    q: "A major tech supply chain vulnerability is:",
+    options: [
+      "Cheap labour",
+      "Semiconductor chokepoints & rare-earth dependence",
+      "Too many suppliers",
+      "Extra satellites"
+    ],
+    correct: 1
+  }],
+          
+        },
+        
+        
+        },
+    };
+
+    // STATE
+    let currentModuleId = "political";
+    let currentWeekNumber = 1;
+    let currentDayIndex = 0; // 0 -> Day 1
+
+    const moduleGrid = document.getElementById("moduleGrid");
+    const weekDayContainer = document.getElementById("weekDayContainer");
+    const quizContainer = document.getElementById("quizContainer");
+    const quizTitle = document.getElementById("quizTitle");
+    const quizSubtitle = document.getElementById("quizSubtitle");
+    const quizMetaBadge = document.getElementById("quizMetaBadge");
+    const submitBtn = document.getElementById("submitBtn");
+    const resetBtn = document.getElementById("resetBtn");
+    const scoreBox = document.getElementById("scoreBox");
+    const usageBadge = document.getElementById("usageBadge");
+
+    // ----- Usage counter -----
+    function getTotalSubmits() {
+      return Number(localStorage.getItem("ggcTotalSubmits") || "0");
+    }
+
+    function setTotalSubmits(value) {
+      localStorage.setItem("ggcTotalSubmits", String(value));
+    }
+
+    function updateUsageBadge() {
+      const count = getTotalSubmits();
+      usageBadge.textContent = `Tests taken (this browser): ${count}`;
+    }
+
+    // ----- Render modules -----
+    function renderModules() {
+      moduleGrid.innerHTML = "";
+      modules.forEach((mod) => {
+        const card = document.createElement("div");
+        card.className =
+          "module-card" + (mod.id === currentModuleId ? " active" : "");
+        card.onclick = () => {
+          currentModuleId = mod.id;
+          currentWeekNumber = 1;
+          currentDayIndex = 0;
+          renderModules();
+          renderWeekDaySidebar();
+          renderQuiz();
+        };
+
+        card.innerHTML = `
+          <div class="module-tag">${mod.colorTag}</div>
+          <div class="module-title">${mod.name}</div>
+          <div class="module-sub">${mod.desc}</div>
+        `;
+
+        moduleGrid.appendChild(card);
+      });
+    }
+
+    // ----- Render week/day sidebar (Weeks 1–13, Day 1–3) -----
+function renderWeekDaySidebar() {
+  weekDayContainer.innerHTML = "";
+
+  // WEEK RANGES PER MODULE
+  const weekRanges = {
+    political: { start: 1, end: 6 },
+    environmental: { start: 8, end: 10 },
+    economic: { start: 11, end: 12 },
+    technological: { start: 12, end: 13 }
+  };
+
+  const { start, end } = weekRanges[currentModuleId];
+
+  for (let w = start; w <= end; w++) {
+    const weekBlock = document.createElement("div");
+    weekBlock.className = "week-block";
+
+    const weekTitle = document.createElement("div");
+    weekTitle.className = "week-title";
+    weekTitle.textContent = `Week ${w}`;
+    weekBlock.appendChild(weekTitle);
+
+    const dayList = document.createElement("div");
+    dayList.className = "day-list";
+
+    DAY_LABELS.forEach((dayLabel, dayIdx) => {
+      const dayPill = document.createElement("button");
+      dayPill.type = "button";
+
+      const weekKey = `Week ${w}`;
+      const hasQuestions =
+        questionsData[currentModuleId] &&
+        questionsData[currentModuleId][weekKey] &&
+        questionsData[currentModuleId][weekKey][dayLabel] &&
+        questionsData[currentModuleId][weekKey][dayLabel].length > 0;
+
+      let className = "day-pill";
+      if (hasQuestions) className += " has-questions";
+      if (w === currentWeekNumber && dayIdx === currentDayIndex) {
+        className += " active";
+      }
+      dayPill.className = className;
+      dayPill.textContent = dayLabel;
+
+      dayPill.onclick = () => {
+        currentWeekNumber = w;
+        currentDayIndex = dayIdx;
+        renderWeekDaySidebar();
+        renderQuiz();
+      };
+
+      dayList.appendChild(dayPill);
+    });
+
+    weekBlock.appendChild(dayList);
+    weekDayContainer.appendChild(weekBlock);
+  }
+}
+
+
+    // ----- Render quiz area -----
+    function renderQuiz() {
+      scoreBox.textContent = "";
+      quizContainer.innerHTML = "";
+
+      const moduleName =
+        modules.find((m) => m.id === currentModuleId)?.name || "Module";
+      const weekKey = `Week ${currentWeekNumber}`;
+      const dayLabel = DAY_LABELS[currentDayIndex];
+
+      quizTitle.textContent = `${moduleName} · ${weekKey} · ${dayLabel}`;
+      quizSubtitle.textContent =
+        "Attempt the MCQs below and then click Submit Test.";
+
+      const moduleData = questionsData[currentModuleId];
+      const questions =
+        moduleData && moduleData[weekKey] && moduleData[weekKey][dayLabel]
+          ? moduleData[weekKey][dayLabel]
+          : [];
+
+      quizMetaBadge.textContent = `${questions.length} Question${
+        questions.length === 1 ? "" : "s"
+      }`;
+
+      if (!questions.length) {
+        quizContainer.innerHTML =
+          "<p class='empty-note'>No questions added for this day yet. Once MCQs are created from the PPT, they will appear here.</p>";
+        return;
+      }
+
+      questions.forEach((q, index) => {
+        const qDiv = document.createElement("div");
+        qDiv.className = "question";
+
+        const qTitle = document.createElement("h4");
+        qTitle.textContent = `${index + 1}. ${q.q}`;
+        qDiv.appendChild(qTitle);
+
+        q.options.forEach((opt, i) => {
+          const optDiv = document.createElement("div");
+          optDiv.className = "option";
+          optDiv.textContent = opt;
+
+          optDiv.onclick = () => {
+            // Clear previous selection
+            Array.from(qDiv.querySelectorAll(".option")).forEach((o) =>
+              o.classList.remove("selected")
+            );
+            optDiv.classList.add("selected");
+            q.selected = i;
+          };
+
+          qDiv.appendChild(optDiv);
+        });
+
+        const exp = document.createElement("div");
+        exp.className = "explanation";
+        exp.textContent = "Explanation: " + q.explanation;
+        qDiv.appendChild(exp);
+
+        quizContainer.appendChild(qDiv);
+      });
+    }
+
+    // ----- Submit test -----
+    submitBtn.onclick = () => {
+      const weekKey = `Week ${currentWeekNumber}`;
+      const dayLabel = DAY_LABELS[currentDayIndex];
+
+      const moduleData = questionsData[currentModuleId];
+      const questions =
+        moduleData && moduleData[weekKey] && moduleData[weekKey][dayLabel]
+          ? moduleData[weekKey][dayLabel]
+          : [];
+
+      if (!questions.length) {
+        scoreBox.textContent = "No questions to submit for this day.";
+        return;
+      }
+
+      let score = 0;
+      const questionBlocks = quizContainer.children;
+
+      questions.forEach((q, i) => {
+        const qBlock = questionBlocks[i];
+        const options = qBlock.querySelectorAll(".option");
+        const expDiv = qBlock.querySelector(".explanation");
+
+        // Clear previous status
+        options.forEach((o) => {
+          o.classList.remove("correct", "wrong");
+        });
+
+        if (q.selected === q.correct) {
+          score++;
+          options[q.correct].classList.add("correct");
+        } else {
+          if (q.selected !== undefined) {
+            options[q.selected].classList.add("wrong");
+          }
+          options[q.correct].classList.add("correct");
+          expDiv.style.display = "block";
+        }
+      });
+
+      scoreBox.textContent = `Your Score: ${score} / ${questions.length}`;
+
+      // Update usage counter (one test submitted)
+      const current = getTotalSubmits();
+      setTotalSubmits(current + 1);
+      updateUsageBadge();
+    };
+
+    // ----- Reset -----
+    resetBtn.onclick = () => {
+      const weekKey = `Week ${currentWeekNumber}`;
+      const dayLabel = DAY_LABELS[currentDayIndex];
+
+      const moduleData = questionsData[currentModuleId];
+      const questions =
+        moduleData && moduleData[weekKey] && moduleData[weekKey][dayLabel]
+          ? moduleData[weekKey][dayLabel]
+          : [];
+
+      questions.forEach((q) => {
+        delete q.selected;
+      });
+
+      renderQuiz();
+      scoreBox.textContent = "";
+    };
+
+    // ----- Initial render -----
+    renderModules();
+    renderWeekDaySidebar();
+    renderQuiz();
+    updateUsageBadge();
+  </script>
+</body>
+</html>
