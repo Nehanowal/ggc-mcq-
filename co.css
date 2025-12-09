@@ -1,0 +1,368 @@
+* {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: #f3f4f6;
+      color: #111827;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      background: #ffffff;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .nav-brand {
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 16px;
+      color: #111827;
+    }
+    .nav-pill {
+      padding: 3px 9px;
+      font-size: 11px;
+      border-radius: 999px;
+      background: #dbeafe;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+    }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      color: #6b7280;
+    }
+    .usage-badge {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      font-size: 11px;
+      color: #1d4ed8;
+      font-weight: 500;
+    }
+
+    /* Layout */
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    /* Hero */
+    .hero {
+      margin-top: 12px;
+      margin-bottom: 24px;
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.5fr);
+      gap: 16px;
+    }
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+    .hero-main h1 {
+      font-size: clamp(26px, 3.5vw, 32px);
+      margin: 0 0 8px;
+      color: #111827;
+    }
+    .hero-main p {
+      margin: 0;
+      color: #4b5563;
+      font-size: 14px;
+    }
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 11px;
+    }
+    .pill {
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      color: #374151;
+      background: #ffffff;
+    }
+    .hero-card {
+      border-radius: 16px;
+      padding: 14px;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      font-size: 13px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+    }
+    .hero-card h2 {
+      margin-top: 0;
+      font-size: 16px;
+      margin-bottom: 6px;
+      color: #111827;
+    }
+    .hero-stat-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    .stat-chip {
+      padding: 6px 10px;
+      border-radius: 10px;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      font-size: 11px;
+      color: #047857;
+    }
+
+    /* Module selector */
+    .section-title {
+      font-size: 16px;
+      margin-bottom: 8px;
+      margin-top: 8px;
+      color: #111827;
+    }
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 900px) {
+      .modules-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 600px) {
+      .modules-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .module-card {
+      border-radius: 14px;
+      padding: 10px 12px;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease,
+        border-color 0.12s ease, background 0.12s ease;
+      font-size: 13px;
+    }
+    .module-card:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+      border-color: #bfdbfe;
+    }
+    .module-card.active {
+      background: #eff6ff;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.25);
+    }
+    .module-tag {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      border: 1px solid #d1d5db;
+      color: #4b5563;
+      display: inline-block;
+      margin-bottom: 4px;
+    }
+    .module-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #111827;
+    }
+    .module-sub {
+      color: #6b7280;
+      font-size: 11px;
+    }
+
+    /* Main content: sidebar (weeks/days) + quiz */
+    .content-layout {
+      display: grid;
+      grid-template-columns: 240px minmax(0, 1fr);
+      gap: 14px;
+      margin-top: 6px;
+    }
+    @media (max-width: 800px) {
+      .content-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .sidebar {
+      border-radius: 14px;
+      padding: 10px;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      font-size: 13px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+    }
+    .sidebar h3 {
+      margin-top: 0;
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: #111827;
+    }
+    .week-block {
+      margin-bottom: 8px;
+    }
+    .week-title {
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #4b5563;
+    }
+    .day-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    .day-pill {
+      padding: 3px 7px;
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      font-size: 11px;
+      cursor: pointer;
+      background: #f9fafb;
+      color: #374151;
+    }
+    .day-pill.has-questions {
+      border-color: #93c5fd;
+    }
+    .day-pill.active {
+      background: #2563eb;
+      border-color: #1d4ed8;
+      color: #ffffff;
+    }
+
+    /* Quiz */
+    .quiz-wrapper {
+      border-radius: 14px;
+      padding: 12px;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      font-size: 14px;
+      box-shadow: 0 4px 18px rgba(15, 23, 42, 0.05);
+    }
+    .quiz-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: center;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 6px;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+    .badge-soft {
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      border: 1px solid #e5e7eb;
+      color: #374151;
+      background: #f9fafb;
+    }
+    .question {
+      margin-bottom: 18px;
+      padding: 10px;
+      background: #f9fafb;
+      border-radius: 10px;
+      border: 1px solid #e5e7eb;
+    }
+    .question h4 {
+      margin: 0 0 6px;
+      font-size: 14px;
+      color: #111827;
+    }
+    .option {
+      margin: 6px 0;
+      padding: 8px;
+      background: #ffffff;
+      border-radius: 8px;
+      cursor: pointer;
+      user-select: none;
+      border: 1px solid #e5e7eb;
+      font-size: 13px;
+      color: #111827;
+    }
+    .option:hover {
+      background: #eff6ff;
+    }
+    .selected {
+      background: #e0ecff !important;
+      border-color: #2563eb;
+    }
+    .correct {
+      background: #dcfce7 !important;
+      border-color: #16a34a !important;
+    }
+    .wrong {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+    }
+    .explanation {
+      display: none;
+      font-size: 12px;
+      margin-top: 4px;
+      color: #6b7280;
+    }
+    .quiz-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+    #submitBtn {
+      padding: 8px 16px;
+      background: #2563eb;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    #submitBtn:hover {
+      background: #1d4ed8;
+    }
+    #resetBtn {
+      padding: 8px 14px;
+      background: #ffffff;
+      color: #374151;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    #resetBtn:hover {
+      background: #f3f4f6;
+    }
+    #scoreBox {
+      font-size: 14px;
+      font-weight: 500;
+      color: #b45309;
+    }
+    .empty-note {
+      font-size: 13px;
+      color: #6b7280;
+    }

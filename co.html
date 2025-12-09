@@ -202,7 +202,7 @@
       font-size: 11px;
     }
 
-    /* Main content: sidebar (weeks/days) + quiz */
+   
     .content-layout {
       display: grid;
       grid-template-columns: 240px minmax(0, 1fr);
@@ -2912,7 +2912,7 @@ function renderWeekDaySidebar() {
 
       if (!questions.length) {
         quizContainer.innerHTML =
-          "<p class='empty-note'>No questions added for this day yet. Once MCQs are created from the PPT, they will appear here.</p>";
+          "<p class='empty-note'>No class.</p>";
         return;
       }
 
@@ -2949,6 +2949,7 @@ function renderWeekDaySidebar() {
         quizContainer.appendChild(qDiv);
       });
     }
+
 
     // ----- Submit test -----
     submitBtn.onclick = () => {
